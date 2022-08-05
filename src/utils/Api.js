@@ -1,11 +1,3 @@
-const requestApi = new Api({
-  baseUrl: 'https://nomoreparties.co/v1/cohort-40/',
-  headers: {
-    authorization: '6e087a0f-c27a-43c1-a0e6-91ac2272b53b',
-    'Content-Type': 'application/json'
-  }
-});
-
 class Api {
   constructor(configApi) {
     this._profileInfoUrl = `${configApi.baseUrl}` + '/users/me';
@@ -101,5 +93,13 @@ class Api {
 
 }
 
-export { Api }
+const requestApi = new Api({
+  baseUrl: 'https://nomoreparties.co/v1/cohort-40/',
+  headers: {
+    authorization: '6e087a0f-c27a-43c1-a0e6-91ac2272b53b',
+    'Content-Type': 'application/json'
+  }
+});
+
+export default requestApi;
 
