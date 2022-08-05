@@ -9,17 +9,35 @@ import ImagePopup from './ImagePopup';
 
 
 function App() {
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+  //const [card, setCard] = React.useState();
+
+
+
+  function closeAllPopups() {
+    setEditAvatarPopupOpen(false);
+    setEditProfilePopupOpen(false);
+    setAddPlacePopupOpen(false);
+  }
 
   function handleEditAvatarClick() {
-    console.log('нажат аватар')
+    console.log('нажат аватар');
+    setEditAvatarPopupOpen(true);
+
   }
 
   function handleEditProfileClick() {
-    console.log('нажато профиль')
+    console.log('нажато профиль');
+    setEditProfilePopupOpen(true);
+
   }
 
   function handleAddPlaceClick() {
-    console.log('нажато добавить карточку')
+    console.log('нажато добавить карточку');
+    setAddPlacePopupOpen(true);
+
   }
 
 
@@ -28,9 +46,9 @@ function App() {
       <div className="root__content">
         <Header />
         <Main
-          handleEditAvatarClick={handleEditAvatarClick}
-          handleEditProfileClick={handleEditProfileClick}
-          handleAddPlaceClick={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
         />
 
         <Footer />
@@ -39,8 +57,10 @@ function App() {
         {/* Edit */}
         <PopupWithForm
           title='Редактировать профиль'
-          name=''
-          btnName=''
+          name='formEdit'
+          btnName='Сохранить'
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
         >
           <input className="popup__edit-input" id="inputEditName" name="formName" form="formEdit" type="text"
             placeholder="Имя" minLength="2" maxLength="40" required />
@@ -54,8 +74,10 @@ function App() {
         {/* Add */}
         <PopupWithForm
           title='Новое место'
-          name=''
-          btnName=''
+          name='formAdd'
+          btnName='Создать'
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
         >
           <input className="popup__edit-input" id="inputAddName" name="formName" form="formAdd" type="text"
             placeholder="Название" minLength="2" maxLength="30" required />
@@ -69,8 +91,10 @@ function App() {
         {/* Avatar */}
         <PopupWithForm
           title='Обновить аватар'
-          name=''
-          btnName=''
+          name='formAddAvatar'
+          btnName='Сохранить'
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
         >
           <input className="popup__edit-input" id="inputAddLinkAvatar" name="formText" form="formAddAvatar" type="url"
             placeholder="Ссылка на картинку" required />
@@ -79,89 +103,14 @@ function App() {
 
 
         {/* Delete */}
-        <PopupWithForm
+        {/* <PopupWithForm
           title='Вы уверены?'
-          name=''
-          btnName=''
+          name='formDeleteCard'
+          btnName='Да'
+          onClose={closeAllPopups}
         >
-        </PopupWithForm>
+        </PopupWithForm> */}
 
-
-
-
-        <div id="popupEdit" className="popup popup_close popup_overlay">
-          <div className="popup__container">
-            <h2 className="popup__edit-header">Редактировать профиль</h2>
-            <form className="form" id="formEdit" name="form-edit" noValidate>
-              <section className="form__section" aria-label="имя">
-                <input className="popup__edit-input" id="inputEditName" name="formName" form="formEdit" type="text"
-                  placeholder="Имя" minLength="2" maxLength="40" required />
-                <span id="inputEditName-error" className="popup__input-error">Вы пропустили это поле.</span>
-              </section>
-              <section className="form__section" aria-label="описание деятельности">
-                <input className="popup__edit-input" id="inputEditText" name="formText" form="formEdit" type="text"
-                  placeholder="О себе" minLength="2" maxLength="200" required />
-                <span id="inputEditText-error" className="popup__input-error">Вы пропустили это поле.</span>
-              </section>
-              <button className="popup__btn-save" type="submit">Сохранить</button>
-            </form>
-            <button className="popup__btn-close" type="button"></button>
-          </div>
-        </div>
-
-        <div id="popupAddCard" className="popup popup_close popup_overlay">
-          <div className="popup__container">
-            <h2 className="popup__edit-header">Новое место</h2>
-            <form className="form" id="formAdd" name="form-add" noValidate>
-              <section className="form__section" aria-label="название места">
-                <input className="popup__edit-input" id="inputAddName" name="formName" form="formAdd" type="text"
-                  placeholder="Название" minLength="2" maxLength="30" required />
-                <span id="inputAddName-error" className="popup__input-error">Вы пропустили это поле.</span>
-              </section>
-              <section className="form__section" aria-label="ссылка на картинку">
-                <input className="popup__edit-input" id="inputAddLink" name="formText" form="formAdd" type="url"
-                  placeholder="Ссылка на картинку" required />
-                <span id="inputAddLink-error" className="popup__input-error">Введите адрес сайта.</span>
-              </section>
-              <button className="popup__btn-save" type="submit">Создать</button>
-            </form>
-            <button className="popup__btn-close" type="button"></button>
-          </div>
-        </div>
-
-        <div id="popupCardImg" className="popup popup_close popup_overlay">
-          <figure className="popup__container-image">
-            <button className="popup__btn-close popup__btn-close_type_position" type="button"></button>
-            <img className="popup__image" src="#" alt="#" />
-            <figcaption className="popup__image-name"></figcaption>
-          </figure>
-        </div>
-      </div>
-
-
-      <div id="popupDeleteCard" className="popup popup_close popup_overlay">
-        <div className="popup__container">
-          <h2 className="popup__edit-header">Вы уверены?</h2>
-          <form className="form" id="formDeleteCard">
-            <button className="popup__btn-save popup__btn-save_type_position-confirm" type="submit">Да</button>
-          </form>
-          <button className="popup__btn-close popup__btn-close_type_position-confirm" type="button"></button>
-        </div>
-      </div>
-
-      <div id="popupAvatar" className="popup popup_close popup_overlay">
-        <div className="popup__container">
-          <h2 className="popup__edit-header">Обновить аватар</h2>
-          <form className="form" id="formAddAvatar" name="form-addAvatar" noValidate>
-            <section className="form__section" aria-label="ссылка на картинку">
-              <input className="popup__edit-input" id="inputAddLinkAvatar" name="formText" form="formAddAvatar" type="url"
-                placeholder="Ссылка на картинку" required />
-              <span id="inputAddLinkAvatar-error" className="popup__input-error">Введите адрес.</span>
-            </section>
-            <button className="popup__btn-save popup__btn-save_type_position-avatar" type="submit">Сохранить</button>
-          </form>
-          <button className="popup__btn-close popup__btn-close_type_position-avatar" type="button"></button>
-        </div>
       </div>
 
     </div>
