@@ -11,24 +11,20 @@ function Main(props) {
   const [userAvatar, setUserAvatar] = React.useState('');
   const [cards, setCards] = React.useState([]);
 
-  console.log(api);
-  api.getInitialCards().then((info) => { console.log(info); })
 
   React.useState(() => {
-    api.getInitialCards()
-      .then(info => {
-        setUserName(info.name)
-        setUserDescription(info.description)
-        setUserAvatar(info.avatar)
-        console.log(info.name);
+    api.getProfileInfo()
+      .then((profileInfo) => {
+        setUserName(profileInfo.name);
+        setUserDescription(profileInfo.about);
+        setUserAvatar(profileInfo.avatar);
       }).catch(err => console.log(err))
   }, []);
 
   React.useState(() => {
-    api.getProfileInfo()
-      .then(info => {
-        setCards(info.cards)
-        console.log(info.cards);
+    api.getInitialCards()
+      .then((cardsInfo) => {
+        setCards(cardsInfo)
       }).catch(err => console.log(err))
   }, []);
 
@@ -45,7 +41,11 @@ function Main(props) {
         <button className="profile__btn-edit" type="button" onClick={props.onEditProfile}></button>
         <button className="profile__btn-add" type="button" onClick={props.onAddPlace}></button>
       </section>
-      <section className="gallery" aria-label="галерея"></section>
+      <section className="gallery" aria-label="галерея">
+        {cards.map((elementCard, index) => (
+          <Card key={elementCard.index} card={elementCard} />)
+        )}
+      </section>
     </main>
   )
 }
