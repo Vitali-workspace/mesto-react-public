@@ -5,41 +5,36 @@ import Main from './Main';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 
-//import api from '../utils/Api';
-
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
-  //const [card, setCard] = React.useState();
-
-
+  const [selectedCard, setSelectedCard] = React.useState(false);
 
   function closeAllPopups() {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
+    setSelectedCard(false);
   }
 
   function handleEditAvatarClick() {
-    console.log('нажат аватар');
     setEditAvatarPopupOpen(true);
-
   }
 
   function handleEditProfileClick() {
-    console.log('нажато профиль');
     setEditProfilePopupOpen(true);
-
   }
 
   function handleAddPlaceClick() {
-    console.log('нажато добавить карточку');
     setAddPlacePopupOpen(true);
-
   }
 
+  // функция для передачи информации о карточке по которой кликнули
+  function handleCardClick(card) {
+    setSelectedCard(card);
+  }
 
   return (
     <div className="root">
@@ -49,10 +44,12 @@ function App() {
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
+          onCardClick={handleCardClick}
         />
 
         <Footer />
 
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
         {/* Edit */}
         <PopupWithForm
@@ -103,13 +100,13 @@ function App() {
 
 
         {/* Delete */}
-        {/* <PopupWithForm
+        <PopupWithForm
           title='Вы уверены?'
           name='formDeleteCard'
           btnName='Да'
           onClose={closeAllPopups}
         >
-        </PopupWithForm> */}
+        </PopupWithForm>
 
       </div>
 
