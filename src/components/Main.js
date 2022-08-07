@@ -1,16 +1,14 @@
 
 import React from 'react';
-import photo from '../images/image-prof.png';
+import alternativeAvatar from '../images/image-prof.png';
 import api from '../utils/Api.js';
 import Card from './Card.js';
-//style={{ backgroundImage: `url(${userAvatar})` }}
 
 function Main(props) {
-  const [userName, setUserName] = React.useState('');
-  const [userDescription, setUserDescription] = React.useState('');
-  const [userAvatar, setUserAvatar] = React.useState('');
+  const [userName, setUserName] = React.useState('Жак-Ив Кусто');
+  const [userDescription, setUserDescription] = React.useState('Исследователь океана');
+  const [userAvatar, setUserAvatar] = React.useState(alternativeAvatar);
   const [cards, setCards] = React.useState([]);
-
 
   React.useState(() => {
     api.getProfileInfo()
@@ -34,7 +32,7 @@ function Main(props) {
       <section className="profile">
         <div className="profile__section-avatar">
           <button className="profile__edit-icon" onClick={props.onEditAvatar}></button>
-          <img className="profile__photo" src={photo} alt="фото профиля" />
+          <img className="profile__photo" src={userAvatar} alt="фото профиля" />
         </div>
         <h1 className="profile__name">{userName}</h1>
         <p className="profile__description">{userDescription}</p>
@@ -42,8 +40,9 @@ function Main(props) {
         <button className="profile__btn-add" type="button" onClick={props.onAddPlace}></button>
       </section>
       <section className="gallery" aria-label="галерея">
-        {cards.map((elementCard, index) => (
-          <Card key={elementCard.index} card={elementCard} />)
+        {cards.map((elementCard) => {
+          return (<Card key={elementCard._id} card={elementCard} onCardClick={props.onCardClick} />)
+        }
         )}
       </section>
     </main>
