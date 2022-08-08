@@ -1,10 +1,10 @@
 class Api {
   constructor(configApi) {
-    this._profileInfoUrl = `${configApi.baseUrl}` + '/users/me';
-    this._profileAvatarUrl = `${configApi.baseUrl}` + `/users/me/avatar`;
-    this._cardsUrl = `${configApi.baseUrl}` + `cards`;
-    this._likeCardUrl = `${configApi.baseUrl}` + `cards/`;
-    this._deleteCardUrl = `${configApi.baseUrl}` + `cards/`;
+    this._profileInfoUrl = `${configApi.baseUrl}/users/me`;
+    this._profileAvatarUrl = `${configApi.baseUrl}/users/me/avatar`;
+    this._cardsUrl = `${configApi.baseUrl}cards`;
+    this._likeCardUrl = `${configApi.baseUrl}cards/`;
+    this._deleteCardUrl = `${configApi.baseUrl}cards/`;
     this._headersProperty = configApi.headers;
   }
 
