@@ -46,7 +46,6 @@ function App() {
           onAddPlace={handleAddPlaceClick}
           onCardClick={handleCardClick}
         />
-
         <Footer />
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
@@ -105,8 +104,7 @@ function App() {
           name='formDeleteCard'
           btnName='Да'
           onClose={closeAllPopups}
-        >
-        </PopupWithForm>
+        />
 
       </div>
 

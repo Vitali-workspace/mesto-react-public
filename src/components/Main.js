@@ -31,13 +31,13 @@ function Main(props) {
     <main className="page">
       <section className="profile">
         <div className="profile__section-avatar">
-          <button className="profile__edit-icon" onClick={props.onEditAvatar}></button>
+          <button className="profile__edit-icon" onClick={props.onEditAvatar} />
           <img className="profile__photo" src={userAvatar} alt="фото профиля" />
         </div>
         <h1 className="profile__name">{userName}</h1>
         <p className="profile__description">{userDescription}</p>
-        <button className="profile__btn-edit" type="button" onClick={props.onEditProfile}></button>
-        <button className="profile__btn-add" type="button" onClick={props.onAddPlace}></button>
+        <button className="profile__btn-edit" type="button" onClick={props.onEditProfile} />
+        <button className="profile__btn-add" type="button" onClick={props.onAddPlace} />
       </section>
       <section className="gallery" aria-label="галерея">
         {cards.map((elementCard) => {
