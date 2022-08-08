@@ -10,13 +10,13 @@ function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({ isOpen: false, item: {} });
 
   function closeAllPopups() {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
-    setSelectedCard(false);
+    setSelectedCard({ isOpen: false, item: {} });
   }
 
   function handleEditAvatarClick() {
@@ -33,7 +33,7 @@ function App() {
 
   // функция для передачи информации о карточке по которой кликнули
   function handleCardClick(card) {
-    setSelectedCard(card);
+    setSelectedCard({ isOpen: true, item: card });
   }
 
   return (
