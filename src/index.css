@@ -39,6 +39,7 @@
 @import url(./blocks/popup/__container-image/popup__container-image.css);
 @import url(./blocks/popup/__image/popup__image.css);
 @import url(./blocks/popup/__image-name/popup__image-name.css);
+@import url(./blocks/popup/_overlay/popup_overlay_dark.css);
 
 @import url(./blocks/popup/__edit-input/popup__edit-input.css);
 @import url(./blocks/popup/__btn-save/popup__btn-save.css);
