@@ -11,6 +11,10 @@ function Card(props) {
     `card__delete-button ${isOwn ? 'card__delete-button_visible' : 'card__delete-button_hidden'}`
   );
 
+  // проверка на установку лайка на карточку
+  const isLiked = props.card.likes.some(elementCard => elementCard._id === currentUser._id);
+  const cardLikeButtonClassName = `...`;
+
   //функция с данными карточки для работы попапа ImagePopup
   function handleClick() {
     props.onCardClick(props.card)
