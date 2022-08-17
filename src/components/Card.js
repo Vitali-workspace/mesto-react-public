@@ -1,6 +1,16 @@
 import React from 'react';
+import CurrentUserContext from '../contexts/CurrentUserContext.js';
 
 function Card(props) {
+
+  const currentUser = React.useContext(CurrentUserContext);
+  // проверка id карточки с id моего пользователя.
+  const isOwn = props.card.owner._id === currentUser._id;
+
+  const cardDeleteButtonClassName = (
+    `card__delete-button ${isOwn ? 'card__delete-button_visible' : 'card__delete-button_hidden'}`
+  );
+
   //функция с данными карточки для работы попапа ImagePopup
   function handleClick() {
     props.onCardClick(props.card)
