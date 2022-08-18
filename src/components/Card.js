@@ -11,8 +11,8 @@ function Card(props) {
     `card__delete-button ${isOwn ? 'card__delete-button_visible' : 'card__delete-button_hidden'}`
   );
 
-  // проверка на установку лайка на карточку
-  const isLiked = props.card.likes.some(elementCard => elementCard._id === currentUser._id);
+
+  //const isLiked = props.card.likes.some(elementCard => elementCard._id === currentUser._id);
   const cardLikeButtonClassName = `...`;
 
   //функция с данными карточки для работы попапа ImagePopup
@@ -27,7 +27,7 @@ function Card(props) {
       <div className="gallery__card-header">
         <h3 className="gallery__card-name">{props.card.name}</h3>
         <div className="gallery__favorites-header">
-          <button className="gallery__btn-favorites" type="button" />
+          <button className="gallery__btn-favorites" onClick={props.onCardLike} type="button" />
           <div className="gallery__counter-favorites">{props.card.likes.length}</div>
         </div>
       </div>
