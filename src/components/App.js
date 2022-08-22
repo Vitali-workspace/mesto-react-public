@@ -5,6 +5,7 @@ import Main from './Main';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import api from '../utils/Api.js';
+import EditProfilePopup from './EditProfilePopup';
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
 
 function App() {
@@ -61,20 +62,10 @@ function App() {
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
           {/* Edit */}
-          <PopupWithForm
-            title='Редактировать профиль'
-            name='formEdit'
-            btnName='Сохранить'
+          <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
-          >
-            <input className="popup__edit-input" id="inputEditName" name="formName" form="formEdit" type="text"
-              placeholder="Имя" minLength="2" maxLength="40" required />
-            <span id="inputEditName-error" className="popup__input-error">Вы пропустили это поле.</span>
-            <input className="popup__edit-input" id="inputEditText" name="formText" form="formEdit" type="text"
-              placeholder="О себе" minLength="2" maxLength="200" required />
-            <span id="inputEditText-error" className="popup__input-error">Вы пропустили это поле.</span>
-          </PopupWithForm>
+          />
 
 
           {/* Add */}
