@@ -6,7 +6,12 @@ function PopupWithForm(props) {
     ${props.isOpen ? 'popup_opened' : false} aria-label="всплывающее окно"`}>
       <div className="popup__container">
         <h2 className="popup__edit-header">{props.title}</h2>
-        <form className="form" id={`${props.name}`} name={`${props.name}`} noValidate>
+        <form
+          className="form"
+          id={`${props.name}`}
+          name={`${props.name}`}
+          onSubmit={props.onSubmit}
+          noValidate>
           <>{props.children}</>
           <button className="popup__btn-save" type="submit">{props.btnName}</button>
         </form>

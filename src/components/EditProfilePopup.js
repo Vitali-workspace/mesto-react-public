@@ -4,11 +4,27 @@ import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function EditProfilePopup(props) {
 
-  const currentUser = React.useContext(CurrentUserContext);
   const [isName, setName] = React.useState('Жак-Ив Кусто');
   const [isDescription, setDescription] = React.useState('Исследователь океана');
+  const currentUser = React.useContext(CurrentUserContext);
 
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  }, [currentUser]);
 
+  function changeNameUser(evt) {
+    setName(evt.target.value)
+  }
+
+  function changeDescriptionUser(evt) {
+    setDescription(evt.target.value)
+  }
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    props.onUpdateUser({ name: isName, about: isDescription });
+  }
 
   return (
     <PopupWithForm
@@ -17,13 +33,14 @@ function EditProfilePopup(props) {
       btnName='Сохранить'
       isOpen={props.isOpen}
       onClose={props.onClose}
+      onSubmit={handleSubmit}
     >
       <input
-        onChange={setName}
+        value={isName || ''}
+        onChange={changeNameUser}
         className="popup__edit-input"
         id="inputEditName"
         name="formName"
-        form="formEdit"
         type="text"
         placeholder="Имя"
         //pattern='.{2,40}'
@@ -33,11 +50,11 @@ function EditProfilePopup(props) {
       <span id="inputEditName-error" className="popup__input-error">Вы пропустили это поле.</span>
 
       <input
-        onChange={setDescription}
+        onChange={changeDescriptionUser}
+        value={isDescription || ''}
         className="popup__edit-input"
         id="inputEditText"
         name="formText"
-        form="formEdit"
         type="text"
         placeholder="О себе"
         //pattern='.{2,200}'
