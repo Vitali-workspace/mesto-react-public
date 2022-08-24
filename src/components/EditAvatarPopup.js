@@ -1,15 +1,13 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-import alternativeAvatar from '../images/image-prof.png';
+//import alternativeAvatar from '../images/image-prof.png';
 
 function EditAvatarPopup(props) {
 
-  const avatarRef = React.useRef()
-
+  const avatarRef = React.useRef('');
   function handleSubmit(evt) {
     evt.preventDefault();
-    props.onUpdateAvatar({ avatar: avatarRef });
-
+    props.onUpdateAvatar({ avatar: avatarRef.current.value });
   }
 
   React.useEffect(() => {
@@ -21,20 +19,19 @@ function EditAvatarPopup(props) {
       title='Обновить аватар'
       name='formAddAvatar'
       btnName='Сохранить'
-    // isOpen={isEditAvatarPopupOpen}
-    // onClose={closeAllPopups}
+      isOpen={props.isOpen}
+      onClose={props.onClose}
+      onSubmit={handleSubmit}
     >
       <input
         ref={avatarRef}
         className="popup__edit-input"
         id="inputAddLinkAvatar"
         name="formText"
-        //form="formAddAvatar"
         pattern="(www|http:|https:)+[^\s]+[\w]"
         type="url"
         placeholder="Ссылка на картинку"
         required
-        onSubmit={handleSubmit}
       />
       <span id="inputAddLinkAvatar-error" className="popup__input-error">Введите адрес.</span>
     </PopupWithForm>

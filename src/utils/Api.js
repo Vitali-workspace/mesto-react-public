@@ -39,17 +39,17 @@ class Api {
     return fetch(this._profileInfoUrl, {
       method: 'PATCH',
       headers: this._headersProperty,
-      body: JSON.stringify({ name: `${newProfileInfo.formName}`, about: `${newProfileInfo.formText}` })
+      body: JSON.stringify({ name: `${newProfileInfo.name}`, about: `${newProfileInfo.about}` })
     })
       .then(this._checkError);
   }
 
   // добавление новой карточки на сервер
-  addCardServer(iputsInfo) {
+  addCardServer(inputsInfo) {
     return fetch(this._cardsUrl, {
       method: 'POST',
       headers: this._headersProperty,
-      body: JSON.stringify({ name: `${iputsInfo.formName}`, link: `${iputsInfo.formText}` })
+      body: JSON.stringify({ name: `${inputsInfo.formName}`, link: `${inputsInfo.formText}` })
     })
       .then(this._checkError);
   }
@@ -68,15 +68,16 @@ class Api {
     return fetch(this._profileAvatarUrl, {
       method: 'PATCH',
       headers: this._headersProperty,
-      body: JSON.stringify({ avatar: `${link.formText}` })
+      body: JSON.stringify({ avatar: `${link.avatar}` })
     })
       .then(this._checkError);
   }
 
   // Добавление лайка на сервер
-  likeCardServer(idCard) {
+  likeCardServer(idCard, deleteLike) {
+    console.log('пришлов в'); // method: deleteLike ? 'PUT' : 'DELETE',
     return fetch(this._likeCardUrl + `${idCard}/likes`, {
-      method: 'PUT',
+      method: deleteLike ? 'PUT' : 'DELETE',
       headers: this._headersProperty,
     })
       .then(this._checkError);
