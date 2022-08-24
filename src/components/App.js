@@ -7,6 +7,7 @@ import ImagePopup from './ImagePopup';
 import api from '../utils/Api.js';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
 
 function App() {
@@ -15,12 +16,21 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({ isOpen: false, item: {} });
   const [isCurrentUser, setCurrentUser] = React.useState({});
-  console.log(isCurrentUser); //!===
+
+  const [cards, setCards] = React.useState([]);
+  //console.log(isCurrentUser); //!===
 
   React.useState(() => {
     api.getProfileInfo()
       .then((profileInfo) => {
         setCurrentUser(profileInfo)
+      }).catch(err => console.log(err))
+  }, []);
+
+  React.useState(() => {
+    api.getInitialCards()
+      .then((cardsInfo) => {
+        setCards(cardsInfo)
       }).catch(err => console.log(err))
   }, []);
 
@@ -69,6 +79,39 @@ function App() {
       .catch(err => console.log(err));
   }
 
+
+  // функция удаления и добавления лайков
+  function handleCardLike(card) {
+    // проверка на установку лайка на карточку
+    console.log(card); //! !isLiked
+    const isLiked = card.likes.some(usersCard => usersCard._id === isCurrentUser._id);
+    console.log(isLiked);
+    api.likeCardServer(card._id, !isLiked)
+      .then((newCard) => {
+        console.log(newCard);
+        setCards((state) => {
+          state.map((element) => {
+            console.log(element);
+            let testCard = element._id === card._id ? newCard : element;
+            console.warn(testCard)
+            return testCard;
+          })
+        })
+      })
+      .catch(err => console.log(err))
+  }
+
+  function handleCardDelete(card) {
+    api.deleteCardServer(card._id)
+      .then(() => {
+        const newListCards = cards.filter(elementCard => elementCard._id === card._id ? false : true)
+
+        setCards(newListCards);
+        //! закрытие confirm popup
+      })
+      .catch(err => console.log(err))
+  }
+
   return (
     <CurrentUserContext.Provider value={isCurrentUser}>
       <div className="root">
@@ -79,6 +122,9 @@ function App() {
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
             onCardClick={handleCardClick}
+            stateCards={cards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
           />
           <Footer />
 
