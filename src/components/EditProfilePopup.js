@@ -43,7 +43,7 @@ function EditProfilePopup(props) {
         name="formName"
         type="text"
         placeholder="Имя"
-        //pattern='.{2,40}'
+        //pattern=".{2,40}"
         minLength="2"
         maxLength="40"
         required />
@@ -57,7 +57,7 @@ function EditProfilePopup(props) {
         name="formText"
         type="text"
         placeholder="О себе"
-        //pattern='.{2,200}'
+        //pattern=".{2,200}"
         minLength="2"
         maxLength="200"
         required />
