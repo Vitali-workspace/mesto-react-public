@@ -14,10 +14,10 @@ function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({ isOpen: false, item: {} });
-  const [isCurrentUser, setCurrentUser] = React.useState({});
 
   const [cards, setCards] = React.useState([]);
+  const [selectedCard, setSelectedCard] = React.useState({ isOpen: false, item: {} });
+  const [isCurrentUser, setCurrentUser] = React.useState({});
   //console.log(isCurrentUser); //!===
 
   React.useState(() => {
@@ -79,33 +79,22 @@ function App() {
       .catch(err => console.log(err));
   }
 
-
-  // функция удаления и добавления лайков
   function handleCardLike(card) {
-    // проверка на установку лайка на карточку
-    console.log(card); //! !isLiked
     const isLiked = card.likes.some(usersCard => usersCard._id === isCurrentUser._id);
-    console.log(isLiked);
-    api.likeCardServer(card._id, !isLiked)
+    api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        console.log(newCard);
-        setCards((state) => {
-          state.map((element) => {
-            console.log(element);
-            let testCard = element._id === card._id ? newCard : element;
-            console.warn(testCard)
-            return testCard;
-          })
-        })
+        // получение массива с изменёнными лайками.
+        const newCards = cards.map((elementCard) => elementCard._id === card._id ? newCard : elementCard);
+        setCards(newCards);
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   }
+
 
   function handleCardDelete(card) {
     api.deleteCardServer(card._id)
       .then(() => {
-        const newListCards = cards.filter(elementCard => elementCard._id === card._id ? false : true)
-
+        const newListCards = cards.filter((elementCard) => elementCard._id === card._id ? false : true)
         setCards(newListCards);
         //! закрытие confirm popup
       })
@@ -137,23 +126,11 @@ function App() {
             onUpdateUser={handleUpdateUser}
           />
 
-
           {/* Add */}
-          <PopupWithForm
-            title='Новое место'
-            name='formAdd'
-            btnName='Создать'
+          <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
-          >
-            <input className="popup__edit-input" id="inputAddName" name="formName" form="formAdd" type="text"
-              placeholder="Название" minLength="2" maxLength="30" required />
-            <span id="inputAddName-error" className="popup__input-error">Вы пропустили это поле.</span>
-            <input className="popup__edit-input" id="inputAddLink" name="formText" form="formAdd" type="url"
-              placeholder="Ссылка на картинку" required />
-            <span id="inputAddLink-error" className="popup__input-error">Введите адрес сайта.</span>
-          </PopupWithForm>
-
+          />
 
           {/* Avatar */}
           <EditAvatarPopup

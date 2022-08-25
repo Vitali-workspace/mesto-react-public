@@ -1,6 +1,5 @@
 
 import React from 'react';
-import api from '../utils/Api.js';
 import Card from './Card.js';
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
 
@@ -19,17 +18,17 @@ function Main(props) {
         <button className="profile__btn-edit" type="button" onClick={props.onEditProfile} />
         <button className="profile__btn-add" type="button" onClick={props.onAddPlace} />
       </section>
-
       <section className="gallery" aria-label="галерея">
-        {props.stateCards && props.stateCards.map((elementCard) => (
-          <Card
-            key={elementCard._id}
-            card={elementCard}
-            onCardClick={props.onCardClick}
-            onCardLike={props.onCardLike}
-            onCardDelete={props.onCardDelete}
-          />)
-        )}
+        {
+          props.stateCards.map((elementCard) => (
+            <Card
+              key={elementCard._id}
+              card={elementCard}
+              onCardClick={props.onCardClick}
+              onCardLike={props.onCardLike}
+              onCardDelete={props.onCardDelete}
+            />)
+          )}
       </section>
     </main>
   )
