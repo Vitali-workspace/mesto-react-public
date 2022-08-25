@@ -2,18 +2,22 @@ import React from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import Main from './Main';
-import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import api from '../utils/Api.js';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
+import ConfirmDeletePopup from './ConfirmDeletePopup'
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
 
 function App() {
+
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+
+  const [isIdCardRemove, setIdCardRemove] = React.useState({});
+  const [isConfirmDeletePopupOpen, setConfirmDeletePopupOpen] = React.useState(false);
 
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState({ isOpen: false, item: {} });
@@ -37,6 +41,7 @@ function App() {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
+    setConfirmDeletePopupOpen(false);
     setSelectedCard({ isOpen: false, item: {} });
   }
 
@@ -55,6 +60,16 @@ function App() {
   // функция для передачи информации о карточке по которой кликнули
   function handleCardClick(card) {
     setSelectedCard({ isOpen: true, item: card });
+  }
+
+  // функция открытия попапа для удаления карточки
+  function handleDeleteClick() {
+    setConfirmDeletePopupOpen(true)
+  }
+
+  // функция сохраняющая id карточки для её удаления
+  function сardRemoveId(card) {
+    setIdCardRemove(card)
   }
 
 
@@ -97,11 +112,11 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    api.deleteCardServer(card._id)
+    api.deleteCardServer(card)
       .then(() => {
-        const newListCards = cards.filter((elementCard) => elementCard._id === card._id ? false : true)
+        const newListCards = cards.filter((elementCard) => elementCard._id === card ? false : true)
         setCards(newListCards);
-        //! закрытие confirm popup
+        closeAllPopups();
       })
       .catch(err => console.log(err))
   }
@@ -118,7 +133,8 @@ function App() {
             onCardClick={handleCardClick}
             stateCards={cards}
             onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
+            onCardDelete={сardRemoveId}
+            onConfirmPopup={handleDeleteClick}
           />
 
           <Footer />
@@ -147,11 +163,11 @@ function App() {
           />
 
           {/* Delete */}
-          <PopupWithForm
-            title='Вы уверены?'
-            name='formDeleteCard'
-            btnName='Да'
+          <ConfirmDeletePopup
+            isOpen={isConfirmDeletePopupOpen}
             onClose={closeAllPopups}
+            onCardDelete={handleCardDelete}
+            cardId={isIdCardRemove}
           />
 
         </div>

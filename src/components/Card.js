@@ -9,7 +9,6 @@ function Card(props) {
   const buttonTrashHidden = (
     `gallery__btn-trash ${isOwn ? '' : 'gallery__btn-trash_hidden'}`
   );
-  //console.log(props.onCardLike);
 
   const isLiked = props.card.likes.some(elementCard => elementCard._id === currentUser._id);
   const cardLikeButton = isLiked ? `gallery__btn-favorites_active` : '';
@@ -24,7 +23,9 @@ function Card(props) {
   }
 
   function handleDeleteClick() {
-    props.onCardDelete(props.card);
+    props.onConfirmPopup();
+    //удаление выбранной карточки
+    props.onCardDelete(props.card._id);
   }
 
   return (
