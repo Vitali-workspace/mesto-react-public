@@ -74,19 +74,9 @@ class Api {
   }
 
   // Добавление лайка на сервер
-  likeCardServer(idCard, deleteLike) {
-    console.log('пришлов в'); // method: deleteLike ? 'PUT' : 'DELETE',
+  changeLikeCardStatus(idCard, isLiked) {
     return fetch(this._likeCardUrl + `${idCard}/likes`, {
-      method: deleteLike ? 'PUT' : 'DELETE',
-      headers: this._headersProperty,
-    })
-      .then(this._checkError);
-  }
-
-  // Удаление лайка на сервере.
-  deletelikeCardServer(idCard) {
-    return fetch(this._likeCardUrl + `${idCard}/likes`, {
-      method: 'DELETE',
+      method: isLiked ? 'PUT' : 'DELETE',
       headers: this._headersProperty,
     })
       .then(this._checkError);
