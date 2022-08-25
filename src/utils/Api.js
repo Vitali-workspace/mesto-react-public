@@ -49,7 +49,7 @@ class Api {
     return fetch(this._cardsUrl, {
       method: 'POST',
       headers: this._headersProperty,
-      body: JSON.stringify({ name: `${inputsInfo.formName}`, link: `${inputsInfo.formText}` })
+      body: JSON.stringify({ name: `${inputsInfo.name}`, link: `${inputsInfo.link}` })
     })
       .then(this._checkError);
   }

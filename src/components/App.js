@@ -18,7 +18,6 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState({ isOpen: false, item: {} });
   const [isCurrentUser, setCurrentUser] = React.useState({});
-  //console.log(isCurrentUser); //!===
 
   React.useState(() => {
     api.getProfileInfo()
@@ -69,8 +68,6 @@ function App() {
   }
 
   function handleUpdateAvatar(avatarUrl) {
-    console.log(avatarUrl);
-
     api.addAvatarServer(avatarUrl)
       .then((avatarInfo) => {
         setCurrentUser(avatarInfo);
@@ -90,6 +87,14 @@ function App() {
       .catch(err => console.log(err));
   }
 
+  function handleAddPlaceSubmit(newCard) {
+    api.addCardServer(newCard)
+      .then((newCardInfo) => {
+        setCards([newCardInfo, ...cards]);
+        closeAllPopups();
+      })
+      .catch(err => console.log(err));
+  }
 
   function handleCardDelete(card) {
     api.deleteCardServer(card._id)
@@ -115,6 +120,7 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
           />
+
           <Footer />
 
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
@@ -130,6 +136,7 @@ function App() {
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
+            onAddPlace={handleAddPlaceSubmit}
           />
 
           {/* Avatar */}
