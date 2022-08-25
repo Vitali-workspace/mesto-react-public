@@ -1,8 +1,10 @@
 function PopupWithForm(props) {
   const btnAvatarPosition = (props.name === 'formAddAvatar') ? 'popup__btn-close_type_position-avatar' : '';
+  const btnTrashPosition = (props.name === 'formDeleteCard') ? 'popup__btn-close_type_position-confirm' : '';
 
   return (
-    <section className={`popup popup_type_${props.name} popup_overlay 
+    <section
+      className={`popup popup_type_${props.name} popup_overlay 
     ${props.isOpen ? 'popup_opened' : false} aria-label="всплывающее окно"`}>
       <div className="popup__container">
         <h2 className="popup__edit-header">{props.title}</h2>
@@ -15,7 +17,10 @@ function PopupWithForm(props) {
           <>{props.children}</>
           <button className="popup__btn-save" type="submit">{props.btnName}</button>
         </form>
-        <button className={`popup__btn-close ${btnAvatarPosition}`} type="button" onClick={props.onClose} />
+        <button
+          className={`popup__btn-close ${btnAvatarPosition} ${btnTrashPosition}`}
+          type="button"
+          onClick={props.onClose} />
       </div>
     </section>
   )
