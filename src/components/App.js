@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Footer from './Footer';
 import Header from './Header';
 import Main from './Main';
@@ -126,16 +127,28 @@ function App() {
       <div className="root">
         <div className="root__content">
           <Header />
-          <Main
-            onEditAvatar={handleEditAvatarClick}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onCardClick={handleCardClick}
-            stateCards={cards}
-            onCardLike={handleCardLike}
-            onCardDelete={сardRemoveId}
-            onConfirmPopup={handleDeleteClick}
-          />
+
+          <Route>
+            {/* Regis */}
+            <Route path='/sign-up' />
+
+            {/* Login */}
+            <Route path='/sign-in' />
+
+            {/* Auth */}
+            <Route path='/' />
+
+            <Main
+              onEditAvatar={handleEditAvatarClick}
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onCardClick={handleCardClick}
+              stateCards={cards}
+              onCardLike={handleCardLike}
+              onCardDelete={сardRemoveId}
+              onConfirmPopup={handleDeleteClick}
+            />
+          </Route>
 
           <Footer />
 
