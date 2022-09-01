@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Footer from './Footer';
 import Header from './Header';
 import Main from './Main';
@@ -128,7 +128,7 @@ function App() {
         <div className="root__content">
           <Header />
 
-          <Route>
+          <Routes>
             {/* Regis */}
             <Route path='/sign-up' />
 
@@ -148,7 +148,7 @@ function App() {
               onCardDelete={сardRemoveId}
               onConfirmPopup={handleDeleteClick}
             />
-          </Route>
+          </Routes>
 
           <Footer />
 
