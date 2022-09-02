@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Footer from './Footer';
 import Header from './Header';
 import Main from './Main';
@@ -128,27 +128,29 @@ function App() {
         <div className="root__content">
           <Header />
 
-          <Routes>
+          <Switch>
             {/* Regis */}
-            <Route path='/sign-up' />
+            <Route path='/sign-up'></Route>
 
             {/* Login */}
-            <Route path='/sign-in' />
+            <Route path='/sign-in'></Route>
 
             {/* Auth */}
-            <Route path='/' />
+            {/* <Route path='/'></Route> */}
 
-            <Main
-              onEditAvatar={handleEditAvatarClick}
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onCardClick={handleCardClick}
-              stateCards={cards}
-              onCardLike={handleCardLike}
-              onCardDelete={сardRemoveId}
-              onConfirmPopup={handleDeleteClick}
-            />
-          </Routes>
+            <Route path='/'>
+              <Main
+                onEditAvatar={handleEditAvatarClick}
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onCardClick={handleCardClick}
+                stateCards={cards}
+                onCardLike={handleCardLike}
+                onCardDelete={сardRemoveId}
+                onConfirmPopup={handleDeleteClick}
+              />
+            </Route>
+          </Switch>
 
           <Footer />
 
