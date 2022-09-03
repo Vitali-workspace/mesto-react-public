@@ -9,6 +9,7 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeletePopup from './ConfirmDeletePopup'
+import InfoTooltip from './InfoTooltip'
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+  const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = React.useState(false);
 
   const [isIdCardRemove, setIdCardRemove] = React.useState({});
   const [isConfirmDeletePopupOpen, setConfirmDeletePopupOpen] = React.useState(false);
@@ -43,6 +45,7 @@ function App() {
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setConfirmDeletePopupOpen(false);
+    setInfoTooltipPopupOpen(false);
     setSelectedCard({ isOpen: false, item: {} });
   }
 
@@ -57,6 +60,10 @@ function App() {
   function handleAddPlaceClick() {
     setAddPlacePopupOpen(true);
   }
+
+  // function handleInfoTooltipClick() {
+  //   setInfoTooltipPopupOpen(true);
+  // }
 
   // функция для передачи информации о карточке по которой кликнули
   function handleCardClick(card) {
@@ -183,6 +190,12 @@ function App() {
             onClose={closeAllPopups}
             onCardDelete={handleCardDelete}
             cardId={isIdCardRemove}
+          />
+
+          {/* Оповещение о успешной регистрации */}
+          <InfoTooltip
+            isOpen={isInfoTooltipPopupOpen}
+            onClose={closeAllPopups}
           />
 
         </div>

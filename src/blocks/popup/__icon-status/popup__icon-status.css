@@ -1,0 +1,8 @@
+.popup__icon-status {
+  background-image: url(../../../images/Union-Black.svg);
+  background-repeat: no-repeat;
+  width: 120px;
+  height: 120px;
+  margin: 60px auto 32px;
+
+}
