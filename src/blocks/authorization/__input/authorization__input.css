@@ -1,0 +1,14 @@
+.authorization__input {
+  border: none;
+  border-bottom: 2px solid rgba(204, 204, 204, 1);
+  margin-top: 17px;
+  padding: 10px 0;
+  background-color: transparent;
+  min-width: 358px;
+}
+
+.authorization__input::placeholder {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
