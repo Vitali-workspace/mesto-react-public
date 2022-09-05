@@ -1,0 +1,15 @@
+.header__authorization {
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding-top: 7px;
+}
+
+@media screen and (max-width: 768px) {
+  .header__authorization {
+    font-size: 14px;
+    line-height: 17px;
+    padding-right: 21px;
+  }
+}
