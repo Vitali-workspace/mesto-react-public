@@ -11,6 +11,8 @@ import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeletePopup from './ConfirmDeletePopup'
 import InfoTooltip from './InfoTooltip'
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
+import Login from './Login';
+import Register from './Register';
 
 function App() {
 
@@ -137,10 +139,14 @@ function App() {
 
           <Switch>
             {/* Regis */}
-            <Route path='/sign-up'></Route>
+            <Route path='/sign-up'>
+              <Register />
+            </Route>
 
             {/* Login */}
-            <Route path='/sign-in'></Route>
+            <Route path='/sign-in'>
+              <Login />
+            </Route>
 
             {/* Auth */}
             {/* <Route path='/'></Route> */}
