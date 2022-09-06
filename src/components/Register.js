@@ -24,7 +24,7 @@ function Register(props) {
         />
 
         <button className="popup__btn-save authorization__button" type="submit">Зарегистрироваться</button>
-        <Link to="/sign-in">Уже зарегистрированы? Войти</Link>
+        <Link className="authorization__link" to="/sign-in">Уже зарегистрированы? Войти</Link>
       </form>
 
     </section>

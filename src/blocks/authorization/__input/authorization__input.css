@@ -4,11 +4,19 @@
   margin-top: 17px;
   padding: 10px 0;
   background-color: transparent;
-  min-width: 358px;
+  width: 358px;
 }
 
 .authorization__input::placeholder {
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
+}
+
+@media screen and (max-width: 768px) {
+  .authorization__input {
+    width: 260px;
+    margin-top: 9px;
+    margin-bottom: 7px;
+  }
 }

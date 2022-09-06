@@ -4,3 +4,16 @@
   flex-direction: column;
   align-items: center;
 }
+
+@media screen and (max-width: 1024px) {
+  .authorization {
+    max-width: 880px;
+    min-width: 581px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .authorization {
+    min-width: 320px;
+  }
+}
