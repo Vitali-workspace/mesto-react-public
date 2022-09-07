@@ -1,24 +1,45 @@
+import React from 'react';
 import { Link } from "react-router-dom";
 
 function Register(props) {
 
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  function handleEmail(evt) {
+    setEmail(evt.target.value);
+  }
+
+  function handlePassword(evt) {
+    setPassword(evt.target.value);
+  }
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    //! функция для обработки (email, password)
+    setEmail('');
+    setPassword('');
+  }
+
   return (
     <section className="authorization">
       <h2 className="authorization__header">Регистрация</h2>
-      <form className="authorization__form">
+      <form
+        className="authorization__form"
+        onSubmit={handleSubmit}>
         <input
           className="authorization__input"
-          // value={'isName' || ''}
-          // onChange={''}
-          type="text"
+          name="userEmail"
+          onChange={handleEmail}
+          type="email"
           placeholder="Email"
           required
         />
         <input
           className="authorization__input"
-          // value={'isName' || ''}
-          // onChange={''}
-          type="text"
+          name="userPassword"
+          onChange={handlePassword}
+          type="password"
           placeholder="Пароль"
           required
         />
