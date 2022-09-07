@@ -1,5 +1,24 @@
+import React from 'react';
 
 function Login(props) {
+
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  function handleEmail(evt) {
+    setEmail(evt.target.value);
+  }
+
+  function handlePassword(evt) {
+    setPassword(evt.target.value);
+  }
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    //! функция для обработки (email, password)
+    setEmail('');
+    setPassword('');
+  }
 
 
   return (
@@ -7,20 +26,20 @@ function Login(props) {
       <h2 className="authorization__header">Вход</h2>
       <form
         className="authorization__form"
-        onSubmit={props.onSubmit}>
+        onSubmit={handleSubmit}>
         <input
           className="authorization__input"
-          // value={'isName' || ''}
-          // onChange={''}
-          type="text"
+          name="userEmail"
+          onChange={handleEmail}
+          type="email"
           placeholder="Email"
           required
         />
         <input
           className="authorization__input"
-          // value={'isName' || ''}
-          // onChange={''}
-          type="text"
+          name="userPassword"
+          onChange={handlePassword}
+          type="password"
           placeholder="Пароль"
           required
         />
