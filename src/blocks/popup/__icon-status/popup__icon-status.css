@@ -4,5 +4,10 @@
   width: 120px;
   height: 120px;
   margin: 60px auto 32px;
+}
 
+@media screen and (max-width: 768px) {
+  .popup__icon-status {
+    margin: 50px auto 39px;
+  }
 }
