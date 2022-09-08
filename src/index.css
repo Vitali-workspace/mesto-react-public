@@ -59,6 +59,7 @@
 @import url(./blocks/popup/__icon-status/popup__icon-status.css);
 @import url(./blocks/popup/__container/_type/popup__container_type_tooltip.css);
 @import url(./blocks/popup/__edit-header/_type/popup__edit-header_type_tooltip.css);
+@import url(./blocks/popup/__icon-status-fail/popup__icon-status-fail.css);
 
 @import url(./blocks/authorization/authorization.css);
 @import url(./blocks/authorization/__form/authorization__form.css);
