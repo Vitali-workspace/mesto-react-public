@@ -5,4 +5,11 @@
   text-align: center;
   color: #FFFFFF;
   text-decoration: none;
+  padding-top: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .authorization__link {
+    padding-top: 20px;
+  }
 }
