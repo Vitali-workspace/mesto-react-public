@@ -15,7 +15,8 @@ function Login(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    //! функция для обработки (email, password)
+    props.isLogin(email, password);
+    //! функция для обработки логина (email, password)
     setEmail('');
     setPassword('');
   }

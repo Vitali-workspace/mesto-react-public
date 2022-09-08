@@ -13,13 +13,16 @@ import InfoTooltip from './InfoTooltip'
 import CurrentUserContext from '../contexts/CurrentUserContext.js';
 import Login from './Login';
 import Register from './Register';
+import ProtectedRoute from './ProtectedRoute';
+import * as auth from '../utils/Auth'
+
 
 function App() {
 
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
-  const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = React.useState(false);
+  const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = React.useState({ open: false, status: '' });
 
   const [isIdCardRemove, setIdCardRemove] = React.useState({});
   const [isConfirmDeletePopupOpen, setConfirmDeletePopupOpen] = React.useState(false);
@@ -27,6 +30,10 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState({ isOpen: false, item: {} });
   const [isCurrentUser, setCurrentUser] = React.useState({});
+
+  const [isAuthorized, setAuthorized] = React.useState(false);
+
+
 
   React.useState(() => {
     api.getProfileInfo()
@@ -47,7 +54,7 @@ function App() {
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setConfirmDeletePopupOpen(false);
-    setInfoTooltipPopupOpen(false);
+    setInfoTooltipPopupOpen({ open: false, status: '' });
     setSelectedCard({ isOpen: false, item: {} });
   }
 
@@ -63,7 +70,7 @@ function App() {
     setAddPlacePopupOpen(true);
   }
 
-  // function handleInfoTooltipClick() {
+  // function handleInfoTooltip() {
   //   setInfoTooltipPopupOpen(true);
   // }
 
@@ -131,6 +138,29 @@ function App() {
       .catch(err => console.log(err))
   }
 
+
+  //!
+  function handleLogin(email, password) {
+    //! обращение к auth для логирования
+    auth.authorize(email, password)
+  }
+
+  function handleRegistration(email, password) {
+    //Тут получаем данные от (email, password)
+    console.log(email);
+    setInfoTooltipPopupOpen({ open: true, status: 'fail' });
+    //! обращение к auth для регистрации
+    // auth.register(email, password)
+    //   .then(res => {
+    //     if (res.token) {
+    //       setInfoTooltipPopupOpen({ open: true, status: 'success' });
+    //     } else {
+    //       setInfoTooltipPopupOpen({ open: true, status: 'fail' }); // фейл
+    //     }
+    //   })
+    //! Тут при успехе должен быть переход на /.
+  }
+
   return (
     <CurrentUserContext.Provider value={isCurrentUser}>
       <div className="root">
@@ -140,18 +170,20 @@ function App() {
           <Switch>
             {/* Regis */}
             <Route path='/sign-up'>
-              <Register />
+              <Register isRegistration={handleRegistration} />
             </Route>
 
             {/* Login */}
             <Route path='/sign-in'>
-              <Login />
+              <Login isLogin={handleLogin} />
             </Route>
 
             {/* Auth */}
-            {/* <Route path='/'></Route> */}
+            {/* <Route exact path='/'>
+              <ProtectedRoute />
+            </Route> */}
 
-            <Route path='/'>
+            <Route exact path='/'>
               <Main
                 onEditAvatar={handleEditAvatarClick}
                 onEditProfile={handleEditProfileClick}
@@ -162,10 +194,11 @@ function App() {
                 onCardDelete={сardRemoveId}
                 onConfirmPopup={handleDeleteClick}
               />
+              <Footer />
             </Route>
           </Switch>
 
-          <Footer />
+
 
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 

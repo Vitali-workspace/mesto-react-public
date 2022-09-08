@@ -16,7 +16,7 @@ function Register(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    //! функция для обработки (email, password)
+    props.isRegistration(email, password);
     setEmail('');
     setPassword('');
   }
