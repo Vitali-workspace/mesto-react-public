@@ -15,10 +15,9 @@ function Login(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    props.isLogin(email, password);
-    //! функция для обработки логина (email, password)
-    setEmail('');
-    setPassword('');
+    props.onLogin(password, email);
+    // setEmail('');
+    // setPassword('');
   }
 
 
@@ -27,13 +26,16 @@ function Login(props) {
       <h2 className="authorization__header">Вход</h2>
       <form
         className="authorization__form"
-        onSubmit={handleSubmit}>
+        name='formLogin'
+        onSubmit={handleSubmit}
+        noValidate>
         <input
           className="authorization__input"
           name="userEmail"
           onChange={handleEmail}
           type="email"
           placeholder="Email"
+          value={email || ''}
           required
         />
         <input
@@ -42,6 +44,7 @@ function Login(props) {
           onChange={handlePassword}
           type="password"
           placeholder="Пароль"
+          value={password || ''}
           required
         />
 

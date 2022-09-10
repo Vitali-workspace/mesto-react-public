@@ -16,9 +16,9 @@ function Register(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    props.isRegistration(email, password);
-    setEmail('');
-    setPassword('');
+    props.onRegister(password, email);
+    // setEmail('');
+    // setPassword('');
   }
 
   return (
@@ -26,13 +26,16 @@ function Register(props) {
       <h2 className="authorization__header">Регистрация</h2>
       <form
         className="authorization__form"
-        onSubmit={handleSubmit}>
+        name="formAuthorization"
+        onSubmit={handleSubmit}
+        noValidate>
         <input
           className="authorization__input"
           name="userEmail"
           onChange={handleEmail}
           type="email"
           placeholder="Email"
+          value={email || ''}
           required
         />
         <input
@@ -41,11 +44,17 @@ function Register(props) {
           onChange={handlePassword}
           type="password"
           placeholder="Пароль"
+          value={password || ''}
           required
         />
 
-        <button className="popup__btn-save authorization__button" type="submit">Зарегистрироваться</button>
-        <Link className="authorization__link" to="/sign-in">Уже зарегистрированы? Войти</Link>
+        <button
+          className="popup__btn-save authorization__button"
+          type="submit">Зарегистрироваться</button>
+
+        <Link
+          className="authorization__link"
+          to="/sign-in">Уже зарегистрированы? Войти</Link>
       </form>
 
     </section>
