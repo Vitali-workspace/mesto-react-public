@@ -4,7 +4,11 @@ function ProtectedRoute({ component: Component, ...props }) {
 
   return (
     <Route>
-      {() => props.isAuthorized ? <Component {...props} /> : <Redirect to="./sign-in" />}
+      {
+        () => props.isAuthorized
+          ? <Component {...props} />
+          : <Redirect to="/sign-in" />
+      }
     </Route>
   )
 }
