@@ -6,6 +6,12 @@
   color: #FFFFFF;
   text-decoration: none;
   padding-top: 15px;
+  transition: opacity .4s linear;
+}
+
+.authorization__link:hover {
+  cursor: pointer;
+  opacity: .6;
 }
 
 @media screen and (max-width: 768px) {
