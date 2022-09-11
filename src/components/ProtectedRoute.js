@@ -5,7 +5,7 @@ function ProtectedRoute({ component: Component, ...props }) {
   return (
     <Route>
       {
-        () => props.isAuthorized
+        () => props.statusAuth
           ? <Component {...props} />
           : <Redirect to="/sign-in" />
       }
