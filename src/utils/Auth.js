@@ -3,7 +3,7 @@ const BASE_URL = 'https://auth.nomoreparties.co';
 function checkError(response) {
   const result = (response.ok)
     ? response.json()
-    : Promise.reject(`произошла ошибка:`);
+    : Promise.reject(`произошла ошибка:${response.status}`);
   return result;
 }
 
