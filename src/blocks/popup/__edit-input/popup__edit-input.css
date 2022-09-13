@@ -4,12 +4,13 @@
   width: 351px;
   margin: 0 36px 0;
   padding: 10px 3px;
+  color: #000000;
 }
 
 .popup__edit-input::placeholder {
   font-size: 14px;
   line-height: 17px;
-  color: #000000;
+  color: #C4C4C4;
 }
 
 .popup__edit-input:valid {
