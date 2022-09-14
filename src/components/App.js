@@ -4,17 +4,17 @@ import Footer from './Footer';
 import Header from './Header';
 import Main from './Main';
 import ImagePopup from './ImagePopup';
-import api from '../utils/Api.js';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ConfirmDeletePopup from './ConfirmDeletePopup'
 import InfoTooltip from './InfoTooltip'
-import CurrentUserContext from '../contexts/CurrentUserContext.js';
 import Login from './Login';
 import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
-import * as auth from '../utils/Auth'
+import CurrentUserContext from '../contexts/CurrentUserContext.js';
+import api from '../utils/api.js';
+import * as auth from '../utils/auth'
 
 
 function App() {
@@ -36,19 +36,20 @@ function App() {
   const history = useHistory();
 
 
-  React.useState(() => {
-    api.getProfileInfo()
-      .then((profileInfo) => {
-        setCurrentUser(profileInfo)
-      }).catch(err => console.log(err))
-  }, []);
+  React.useEffect(() => {
+    if (isAuthorized) {
 
-  React.useState(() => {
-    api.getInitialCards()
-      .then((cardsInfo) => {
-        setCards(cardsInfo)
-      }).catch(err => console.log(err))
-  }, []);
+      api.getProfileInfo()
+        .then((profileInfo) => {
+          setCurrentUser(profileInfo)
+        }).catch(err => console.log(err))
+
+      api.getInitialCards()
+        .then((cardsInfo) => {
+          setCards(cardsInfo)
+        }).catch(err => console.log(err))
+    }
+  }, [isAuthorized]);
 
   // проверка наличия токена для фоновой авторизации
   React.useEffect(() => {
