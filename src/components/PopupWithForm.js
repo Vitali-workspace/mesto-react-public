@@ -10,8 +10,8 @@ function PopupWithForm(props) {
         <h2 className="popup__edit-header">{props.title}</h2>
         <form
           className="form"
-          id={`${props.name}`}
-          name={`${props.name}`}
+          id={props.name}
+          name={props.name}
           onSubmit={props.onSubmit}
           noValidate>
           <>{props.children}</>
